@@ -9,6 +9,7 @@
 		<h1>顧客一覧</h1>
 	</haeder>
 	<main>
+		<p th:text="'こんにちは、' + ${@account.name} + 'さん'"></p>
 		<form action="/users" method="get">
 			<input type="text" name="keyword" placeholder="名前" th:value="${keyword}" />
 			<button>検索</button>

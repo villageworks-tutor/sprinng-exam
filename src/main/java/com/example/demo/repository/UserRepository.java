@@ -14,4 +14,10 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 	 */
 	List<User> findByNameContaining(String keyword);
 
+	/**
+	 * メールアドレスとパスワードが一致する顧客を取得する
+	 * SELECT * FROM users WHERE email = ? AND password = ? 
+	 */
+	User findByEmailAndPassword(String email, String password);
+
 }
