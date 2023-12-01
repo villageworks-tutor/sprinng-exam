@@ -11,17 +11,22 @@ import com.example.demo.entity.User;
 import com.example.demo.model.Account;
 import com.example.demo.repository.UserRepository;
 
+import jakarta.servlet.http.HttpSession;
+
 @Controller
 public class AccountController {
-	
+	@Autowired
+	HttpSession session;
 	@Autowired
 	UserRepository userRepository;
 	@Autowired
 	Account account;
 	
 	// ログイン画面表示
-	@GetMapping("/login")
+	@GetMapping({"/login", "/logout"})
 	public String index() {
+		// セッションスコープを破棄
+		session.invalidate();
 		// 画面遷移
 		return "login";
 	}
