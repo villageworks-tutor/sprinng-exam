@@ -21,9 +21,19 @@ public class UsersController {
 	
 	// 顧客一覧画面表示
 	@GetMapping("/users")
-	public String index(Model model) {
-		// すべての顧客を取得
-		List<User> list = userRepository.findAll();
+	public String index(
+			@RequestParam(name = "keyword", defaultValue = "") String keyword,
+			Model model) {
+		// 顧客リストを初期化
+		List<User> list = null;
+		if (keyword.isEmpty()) {
+			// キーワードが入力されていない場合：すべての顧客を取得
+			list = userRepository.findAll();
+		} else {
+			// キーワードが入力されている場合：部分一致検索
+			list = userRepository.findByNameContaining(keyword);
+			model.addAttribute("keyword", keyword);
+		}
 		// 取得した顧客リストをスコープに登録
 		model.addAttribute("userList", list);
 		// 画面遷移
