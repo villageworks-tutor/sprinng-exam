@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.Thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>顧客登録</title>
+</head>
+<body>
+	<header>
+		<h1>顧客登録</h1>
+	</header>
+	<main>
+		<form th:action="'/users/' + ${user.id} + '/edit'" method="post">
+		<table border="1">
+			<tr>
+				<th>顧客ID</th>
+				<td th:text="${user.id}"></td>
+			</tr>
+			<tr>
+				<th>名前</th>
+				<td><input type="text" name="name" th:value="${user.name}" /></td>
+			</tr>
+			<tr>
+				<th>メールアドレス</th>
+				<td><input type="text" name="email" th:value="${user.email}" /></td>
+			</tr>
+			<tr>
+				<th>パスワード</th>
+				<td><input type="text" name="password" th:value="${user.password}" /></td>
+			</tr>
+		</table>
+		<button>更新</button>
+		</form>
+	</main>
+</body>
+</html>

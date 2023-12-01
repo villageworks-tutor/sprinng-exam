@@ -33,6 +33,18 @@ public class User {
 		this.password = password;
 	}
 
+	/**
+	 * コンストラクタ
+	 * @param id
+	 * @param name
+	 * @param email
+	 * @param password
+	 */
+	public User(Integer id, String name, String email, String password) {
+		this(name, email, password);
+		this.id = id;
+	}
+
 	public Integer getId() {
 		return id;
 	}
