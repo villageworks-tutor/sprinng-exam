@@ -78,4 +78,13 @@ public class UsersController {
 		// 画面遷移
 		return "redirect:/users";
 	}
+	
+	// 削除処理
+	@PostMapping("/users/{id}/delete")
+	public String delete(@PathVariable("id") Integer id) {
+		// パスパラメータをもとに顧客を削除
+		userRepository.deleteById(id); // TODO: パスパラメータをもとに顧客を取得し、そのインスタンスを指定して削除でも可
+		// 画面遷移
+		return "redirect:/users";
+	}
 }
