@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -45,6 +46,34 @@ public class UsersController {
 		// リクエストパラメータをもとに顧客インスタンスを生成
 		User user = new User(name, email, password);
 		// 顧客インスタンスの永続化
+		userRepository.save(user);
+		// 画面遷移
+		return "redirect:/users";
+	}
+	
+	// 更新画面表示
+	@GetMapping("/users/{id}/edit")
+	public String edit(
+			@PathVariable("id") Integer id,
+			Model model) {
+		// パスパラメータをもとに顧客インスタンスを取得
+		User user = userRepository.findById(id).get();
+		// 取得した顧客インスタンスをスコープに登録
+		model.addAttribute("user", user);
+		// 画面遷移
+		return "userEdit";
+	}
+	
+	// 更新処理
+	@PostMapping("/users/{id}/edit")
+	public String  update(
+			@PathVariable("id") Integer id,
+			@RequestParam("name") String name,
+			@RequestParam("email") String email,
+			@RequestParam("password") String password) {
+		// パスパラメータとリクエストパラメータをもとに顧客インスタンスを生成
+		User user = new User(id, name, email, password);
+		// 生成した顧客インスタンスを永続化
 		userRepository.save(user);
 		// 画面遷移
 		return "redirect:/users";

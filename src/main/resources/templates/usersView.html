@@ -15,12 +15,18 @@
 				<th>名前</th>
 				<th>メールアドレス</th>
 				<th>パスワード</th>
+				<th>更新</th>
 			</tr>
 			<tr th:each="user:${userList}">
-				<td th:text="${user.id}"></td>				
-				<td th:text="${user.name}"></td>				
-				<td th:text="${user.email}"></td>				
-				<td th:text="${user.password}"></td>				
+				<td th:text="${user.id}"></td>
+				<td th:text="${user.name}"></td>
+				<td th:text="${user.email}"></td>
+				<td th:text="${user.password}"></td>
+				<td>
+					<form th:action="'/users/' + ${user.id} + '/edit'" method="get">
+						<button>更新</button>
+					</form>
+				</td>
 			</tr>
 		</table>
 		<a href="/users/add">新規登録</a>
